@@ -2,7 +2,7 @@
 #include <Adafruit_GFX.h>
 #include <Max72xxPanel.h>
 //#include <Wire.h>
-//#include <RTCLib.h>
+#include <RTClib.h>
 #include "NapLight.h"
 #include "Snake.h"
 

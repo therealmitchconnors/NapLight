@@ -1,5 +1,5 @@
 //#include <Wire.h>
-//#include <RTCLib.h>
+//#include <RTClib.h>
 #include "Snake.h"
 #include "NapLight.h"
 
@@ -57,6 +57,6 @@ void NapLight::turnOn(DateTime apptTime)
 
 bool NapLight::isOn()
 {
-    currStart != new DateTime(0);
+    return currStart != new DateTime(0);
 }
 
