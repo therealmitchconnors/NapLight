@@ -1,44 +1,62 @@
-# import <RTCLib.h>
-# import <Max72xxPanel.h>
+//#include <Wire.h>
+//#include <RTCLib.h>
+#include "Snake.h"
+#include "NapLight.h"
 
-class NapLight {
+//DateTime NapLight::onlist;
+//int NapLight::duration; // in seconds
 
-    *DateTime onlist
-    int duration // in seconds
+//Snake NapLight::snake (10);
 
-    DateTime prevStep;
-    DateTime currStart;
+//DateTime NapLight::prevStep;
+//DateTime NapLight::currStart;
 
+//NapLight::NapLight()
+//{
+//  snake = new Snake(10,0xA0);
+//}
 
-    void step(){
-        DateTime now = RTCLib.now();
-        if(isOn())
+void NapLight::step()
+{
+    DateTime now = RTCLib.now();
+    if(isOn())
+    {
+        DateTime endTime (currStart.unixTime() + duration);
+        // Should I turn off?
+        if(prevStep < endTime && now >= endTime)
         {
-            DateTime endTime (currStart.unixTime() + duration);
-            // Should I turn off?
-            if(prevStep < endTime && now >= endTime)
-            {
-                //Turn me off;
-            } else {
-                //Step the graphics;
-            }
+            turnOff();
         } else {
-            foreach(int i; i=0; onlist.length() - 1; i++)
+            snake.step();
+        }
+    } else {
+        for (int i; i=0; onlist.length() - 1; i++)
+        {
+            DateTime d = onlist[i];
+            if(prevStep < d && now >= d)
             {
-                DateTime d = onlist[i];
-                if(prevStep < d && now >= d)
-                {
-                    // Turn me on;
-                    currStart = d;
-                }
+                turnOn(d);
+                snake.step();
+                break;
             }
         }
-        prevStep = now;
     }
+    prevStep = now;
+}
 
-    bool isOn()
-    {
-        DateTime != new DateTime();
-    }
-};
+void NapLight::turnOff(){
+    snake.shutDown(true);
+    currStart = new DateTime(0);
+}
+
+void NapLight::turnOn(DateTime apptTime)
+{
+    snake.shutDown(false);
+    currStart = apptTime;
+}
+
+bool NapLight::isOn()
+{
+    currStart != new DateTime(0);
+}
 
