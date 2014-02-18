@@ -18,7 +18,7 @@
 
 void NapLight::step()
 {
-    DateTime now = RTCLib.now();
+    DateTime now = rtc.now();
     if(isOn())
     {
         DateTime endTime (currStart.unixTime() + duration);
