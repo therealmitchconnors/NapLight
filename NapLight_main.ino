@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <Wire.h>
 #include <RTClib.h>
 #include <StandardCplusplus.h>
@@ -8,14 +9,14 @@
 #include "NapLight.h"
 #include "Snake.h"
 
-NapLight nl;
-void setUp()
+//NapLight nl;
+void setup()
 {
   SPI.begin();
-  Wire.begin()
+  Wire.begin();
 }
 
 void loop() 
 {
-  nl.step();
+//  nl.step();
 }

@@ -21,7 +21,7 @@ void NapLight::step()
     DateTime now = rtc.now();
     if(isOn())
     {
-        DateTime endTime (currStart.unixTime() + duration);
+        DateTime endTime (currStart.unixtime() + duration);
         // Should I turn off?
         if(prevStep < endTime && now >= endTime)
         {
@@ -30,9 +30,9 @@ void NapLight::step()
             snake.step();
         }
     } else {
-        for (int i; i=0; onlist.length() - 1; i++)
+        for (int i=0; i < 1; i++)
         {
-            DateTime d = onlist[i];
+            DateTime d = onlist;
             if(prevStep < d && now >= d)
             {
                 turnOn(d);
@@ -46,7 +46,7 @@ void NapLight::step()
 
 void NapLight::turnOff(){
     snake.shutDown(true);
-    currStart = new DateTime(0);
+    currStart = 0; //new DateTime(0);
 }
 
 void NapLight::turnOn(DateTime apptTime)
@@ -57,6 +57,6 @@ void NapLight::turnOn(DateTime apptTime)
 
 bool NapLight::isOn()
 {
-    return currStart != new DateTime(0);
+    return currStart != 0;//new DateTime(0);
 }
 
