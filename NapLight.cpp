@@ -3,28 +3,6 @@
 #include "Snake.h"
 #include "NapLight.h"
 
-//DateTime NapLight::onlist;
-//int NapLight::duration; // in seconds
-
-//Snake NapLight::snake (10);
-
-//DateTime NapLight::prevStep;
-//DateTime NapLight::currStart;
-
-//NapLight::NapLight()
-//{
-//  snake = new Snake(10,0xA0);
-//}
-
-void NapLight::addOnTime(DateTime d) {
-  DateTime result[sizeof(onlist) + 1];
-  for(int i=0; i<sizeof(onlist); i++) {
-    result[i] = onlist[i];
-  }
-  result[sizeof(onlist)] = d;
-  onlist = result;
-}
-
 void NapLight::step()
 {
     DateTime now = rtc.now();
@@ -41,7 +19,7 @@ void NapLight::step()
     } else {
         for (int i=0; i < sizeof(onlist); i++)
         {
-            DateTime d = onlist[i];
+            DateTime d = onlist[i].prevOccurence(now);
             if(prevStep < d && now >= d)
             {
                 turnOn(d);
