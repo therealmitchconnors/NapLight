@@ -30,9 +30,9 @@ void NapLight::step()
             snake.step();
         }
     } else {
-        for (int i=0; i < 1; i++)
+        for (int i=0; i < sizeof(onlist); i++)
         {
-            DateTime d = onlist;
+            DateTime d = onlist[i];
             if(prevStep < d && now >= d)
             {
                 turnOn(d);
@@ -46,7 +46,7 @@ void NapLight::step()
 
 void NapLight::turnOff(){
     snake.shutDown(true);
-    currStart = 0; //new DateTime(0);
+    currStart = DateTime(0);
 }
 
 void NapLight::turnOn(DateTime apptTime)
@@ -57,6 +57,6 @@ void NapLight::turnOn(DateTime apptTime)
 
 bool NapLight::isOn()
 {
-    return currStart != 0;//new DateTime(0);
+    return currStart != DateTime(0);
 }
 

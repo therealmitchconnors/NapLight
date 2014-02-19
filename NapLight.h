@@ -12,11 +12,11 @@
 class NapLight 
 {
 public:
-    DateTime onlist;
     int duration; // in seconds
     void step();
-    NapLight() : onlist (0), prevStep (0), currStart(0), snake(10) {}
+    NapLight() : prevStep (0), currStart(0), snake(10) {}
 private:
+    DateTime onlist[0];
     Snake snake;// (10);
     DateTime prevStep;
     DateTime currStart;
