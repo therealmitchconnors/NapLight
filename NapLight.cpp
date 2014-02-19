@@ -20,7 +20,7 @@ void NapLight::step()
         for (int i=0; i < sizeof(onlist); i++)
         {
             DateTime d = onlist[i].prevOccurence(now);
-            if(prevStep < d && now >= d)
+            if(prevStep < d && now >= d && prevStep != DateTime(0))
             {
                 turnOn(d);
                 snake.step();

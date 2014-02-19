@@ -9,7 +9,7 @@ class NapLight
 public:
     int duration; // in seconds
     void step();
-    NapLight() : prevStep (0), currStart(0), snake(10) { rtc.begin(); }
+    NapLight() : prevStep (0), currStart(0), snake(10), duration(3600) { rtc.begin(); }
     Time onlist[8];
     RTC_DS1307 rtc;
 private:
