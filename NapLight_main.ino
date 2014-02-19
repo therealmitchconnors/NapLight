@@ -8,7 +8,7 @@
 #include "Snake.h"
 //#include <Serial.h>
 
-NapLight nl;
+NapLight nl (3600);
 void setup()
 {
   SPI.begin();
@@ -16,6 +16,7 @@ void setup()
   nl.rtc.adjust(DateTime(__DATE__, __TIME__));
   nl.onlist[0] = Time(7,0); //7:00 AM
   nl.onlist[1] = Time(15,30); //3:30 PM
+  nl.turnOn(60);
   //debugSetup();
 }
 

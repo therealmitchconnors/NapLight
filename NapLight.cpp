@@ -47,3 +47,8 @@ bool NapLight::isOn()
     return currStart != DateTime(0);
 }
 
+
+void NapLight::turnOn(int thisDuration) { 
+  turnOn(DateTime(rtc.now().unixtime() + thisDuration - duration)); 
+}
+
