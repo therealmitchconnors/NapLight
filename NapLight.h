@@ -15,6 +15,7 @@ public:
     int duration; // in seconds
     void step();
     NapLight() : prevStep (0), currStart(0), snake(10) {}
+    void addOnTime(DateTime);
 private:
     DateTime onlist[0];
     Snake snake;// (10);

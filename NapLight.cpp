@@ -16,6 +16,15 @@
 //  snake = new Snake(10,0xA0);
 //}
 
+void NapLight::addOnTime(DateTime d) {
+  DateTime result[sizeof(onlist) + 1];
+  for(int i=0; i<sizeof(onlist); i++) {
+    result[i] = onlist[i];
+  }
+  result[sizeof(onlist)] = d;
+  onlist = result;
+}
+
 void NapLight::step()
 {
     DateTime now = rtc.now();
