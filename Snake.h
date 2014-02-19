@@ -31,7 +31,7 @@ private:
 	Max72xxPanel matrix;
 	static const int length = 8;
 
-	int* x, y;
+	int x[length], y[length];
 	int ptr, nextPtr;
 
 	boolean occupied(int ptrA);
