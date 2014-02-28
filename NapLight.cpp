@@ -19,9 +19,21 @@ void NapLight::step()
     } else {
         for (int i=0; i < sizeof(onlist); i++)
         {
+            if(onlist[i].hour() > 24){
+              // This is like a 'null' time, since arrays are fixed length.
+              break;
+            }
             DateTime d = onlist[i].prevOccurence(now);
-            if(prevStep < d && now >= d && prevStep != DateTime(0))
+            if(debug && prevStep < d && now >= d && prevStep != DateTime(0))
             {
+                Serial.println("**********");
+                Serial.print("Turning on at: ");
+                printDate(now);
+                Serial.print("For time: ");
+                printTime(onlist[i]);
+                Serial.print("previous occurence: ");
+                printDate(d);
+                Serial.println("********");
                 turnOn(d);
                 snake.step();
                 break;
@@ -52,3 +64,27 @@ void NapLight::turnOn(int thisDuration) {
   turnOn(DateTime(rtc.now().unixtime() + thisDuration - duration)); 
 }
 
+
+void NapLight::printTime(Time t) {
+  Serial.print(t.hour(), DEC);
+  Serial.print(':');
+  Serial.print(t.minute(), DEC);
+  Serial.print(':');
+  Serial.print(t.second(), DEC);
+  Serial.println();
+}
+//
+void NapLight::printDate(DateTime d){
+  Serial.print(d.year(), DEC);
+  Serial.print('/');
+  Serial.print(d.month(), DEC);
+  Serial.print('/');
+  Serial.print(d.day(), DEC);
+  Serial.print(' ');
+  Serial.print(d.hour(), DEC);
+  Serial.print(':');
+  Serial.print(d.minute(), DEC);
+  Serial.print(':');
+  Serial.print(d.second(), DEC);
+  Serial.println();
+}

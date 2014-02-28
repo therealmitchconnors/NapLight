@@ -13,9 +13,10 @@ void setup()
 {
   SPI.begin();
   Wire.begin();
-  nl.rtc.adjust(DateTime(__DATE__, __TIME__));
-  nl.onlist[0] = Time(7,0); //7:00 AM
+//  nl.rtc.adjust(DateTime(__DATE__, __TIME__));
+  nl.onlist[0] = Time(7,00); //7:00 AM
   nl.onlist[1] = Time(15,30); //3:30 PM
+  nl.onlist[2] = Time(16,31); //4:31 PM
   nl.turnOn(60);
   debugSetup();
 }
@@ -28,53 +29,43 @@ void loop()
 }
 //
 void debugSetup() {
+  nl.debug = true;
   Serial.begin(9600);
-//  Time t = nl.onlist[1];
-//  DateTime now = nl.rtc.now();
-//  Serial.print("Startup time is: ");
-//  printDate(now);
-//  Serial.print("Target alarm time: ");
-//  printTime(t);
-//  Serial.print("Previous occurence of time: ");
-//  printDate(t.prevOccurence(now));
-//  Serial.print("Next occurence of time: ");
-//  printDate(t.nextOccurence(now));
-//  Serial.println(now.compare(t.nextOccurence(now)));
-//  Serial.print("previous when now: ");
-//  printDate(now.getTime().prevOccurence(now));
-//  Serial.print("next when now: ");
-//  printDate(now.getTime().nextOccurence(now));
+  Time t = nl.onlist[2];
+  DateTime now = nl.rtc.now();
+  Serial.print("Startup time is: ");
+  nl.printDate(now);
+  Serial.println("Target alarm times: ");
+  nl.printTime(nl.onlist[0]);
+  nl.printTime(nl.onlist[1]);
+  nl.printTime(nl.onlist[2]);  
+  nl.printTime(nl.onlist[3]);
+  nl.printTime(nl.onlist[4]);
+  nl.printTime(nl.onlist[5]);
+  nl.printTime(nl.onlist[6]);  
+  nl.printTime(nl.onlist[7]);
+  Serial.print("Previous occurence of time: ");
+  nl.printDate(t.prevOccurence(now));
+  Serial.print("Next occurence of time: ");
+  nl.printDate(t.nextOccurence(now));
+  Serial.println(now.compare(t.nextOccurence(now)));
+  Serial.print("previous when now: ");
+  nl.printDate(now.getTime().prevOccurence(now));
+  Serial.print("next when now: ");
+  nl.printDate(now.getTime().nextOccurence(now));
 }
 //
+int i;
 void debug() {
+  if(i<4){
+    i++;
+    return;
+  }
+  i = 0;
   DateTime now = nl.rtc.now();
-  printDate(now);
+  nl.printDate(now);
 //  Serial.print("previous step: ");
 //  printDate(nl.prevStep);
 //  Serial.print("snake is on: ");
 //  Serial.println(nl.isOn());
-}
-//
-//void printTime(Time t) {
-//  Serial.print(t.hour(), DEC);
-//  Serial.print(':');
-//  Serial.print(t.minute(), DEC);
-//  Serial.print(':');
-//  Serial.print(t.second(), DEC);
-//  Serial.println();
-//}
-//
-void printDate(DateTime d){
-  Serial.print(d.year(), DEC);
-  Serial.print('/');
-  Serial.print(d.month(), DEC);
-  Serial.print('/');
-  Serial.print(d.day(), DEC);
-  Serial.print(' ');
-  Serial.print(d.hour(), DEC);
-  Serial.print(':');
-  Serial.print(d.minute(), DEC);
-  Serial.print(':');
-  Serial.print(d.second(), DEC);
-  Serial.println();
 }
